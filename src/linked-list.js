@@ -21,7 +21,9 @@ export default class LinkedList {
 
   remove(indexToRemove) {
     if (indexToRemove === 0) { //removing the head index
+      let tempData = this.head.data
       this.head = this.head.next;
+      return tempData;
     } else {
       let currentNode = this.head;
       let currentIndex = 0;
@@ -30,8 +32,9 @@ export default class LinkedList {
           return -1;
         }
         if ((currentIndex + 1 ) === indexToRemove) { //This tells us we have arrived at the node directly before the node we want to remove. Instead of going to the one we want to remove we go to the one right before.
+          let tempData = currentNode.next.data
           currentNode.next = currentNode.next.next; //This sets the current node's next to the one after the one we are removing, thus removing the one we were targeting
-          break;
+          return tempData;
         }
         currentNode = currentNode.next; //if the condition isn't found these lines advance the current node and increment the counter
         currentIndex++;
@@ -81,6 +84,31 @@ export default class LinkedList {
       newNode.next = currentNode.next;
       currentNode.next = newNode;
     }
+  }
+
+  // Remember that linked lists start at index 0. So using the beforeEach data in the test file if you get(2) that will be the third node in the linkedlist.
+  get(index) {
+    if (index > this.count() || index < 0) {
+      return -1;
+    } else {
+      let currentNode = this.head;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.next;
+      }
+      return currentNode.data;
+    }
+  }
+  
+  search(data) {
+    let currentNode = this.head
+    for (let i = 0; i < this.count(); i++) {
+      if (currentNode.data === data) {
+        return i;
+      } 
+      currentNode = currentNode.next
+    }
+
+    return -1
   }
 }
 

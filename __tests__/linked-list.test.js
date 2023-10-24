@@ -5,10 +5,10 @@ describe('LinkedList', () => {
   let linkedListWithNodes = new LinkedList(); //creates new linkedlist with nodes then adds some sample nodes
 
   beforeEach(() => {
-    linkedListWithNodes.insertLast("node1");
-    linkedListWithNodes.insertLast("node2");
-    linkedListWithNodes.insertLast("node3");
-    linkedListWithNodes.insertLast("node4");
+    linkedListWithNodes.insertLast("node1"); //index 0
+    linkedListWithNodes.insertLast("node2"); //index 1
+    linkedListWithNodes.insertLast("node3"); //index 2
+    linkedListWithNodes.insertLast("node4"); //index 3
   });
 
   afterEach(() => {
@@ -47,6 +47,14 @@ describe('LinkedList', () => {
   test('it should return -1 if the index does not exist', () => {
     expect(linkedListWithNodes.remove(9)).toEqual(-1);
   });
+
+  test('it should return the node that is removed', () => {
+    expect(linkedListWithNodes.remove(0)).toEqual("node1")
+  })
+
+  test('it should return the node that is removed', () => {
+    expect(linkedListWithNodes.remove(2)).toEqual("node3")
+  })
 
 // TESTS FOR COUNT() //
   test('it should count the total number of nodes in the linked list', () => {
@@ -90,5 +98,27 @@ describe('LinkedList', () => {
     let linkedList = new LinkedList();
     linkedList.insertAtIndex(3, "inserted node");
     expect(linkedList.head.data).toEqual("inserted node");
+  })
+
+  // TESTS FOR GET() //
+  test('it should get the node at a specified index', () => {
+    expect(linkedListWithNodes.get(2)).toEqual("node3");
+  })
+
+  test('it should return a -1 to signify the node does not exist', () => {
+    expect(linkedListWithNodes.get(100)).toEqual(-1);
+  })
+
+  test('it should return a -1 to signify the node does not exist', () => {
+    expect(linkedListWithNodes.get(-100)).toEqual(-1);
+  })
+
+  // TESTS FOR SEARCH() //
+  test('it should return a node with the data provided in the search() method', () => {
+    expect(linkedListWithNodes.search("node2")).toEqual(1)
+  })
+
+  test('it should return -1 if the data provided in the search() method does not exist in the linked list', () => {
+    expect(linkedListWithNodes.search("node one million")).toEqual(-1)
   })
 })
